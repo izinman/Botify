@@ -1,7 +1,7 @@
-; Mutespotify 2.1.1 
-; March 19 2017
-; Created by Isaac Zinman
-; Totally unlicensed and free to use, distribute, and copy
+; Mutespotify 3.1.1 
+; Copyright 2017 Isaac Zinman
+; Free to use and distribute under GNU public license (GPL)
+; For more information on licensing see readme.md
 
 global spotifyIsMuted = false
 global mutex = 0
@@ -11,32 +11,32 @@ FindMuteButton()
 
 Loop
 {
-	if (AdRunning() AND !spotifyIsMuted)
+	if (AdRunning())
 	{
-		Mute()
-		spotifyIsMuted = true
+		if (!%spotifyIsMuted%)
+		{
+			ToggleMute()
+			spotifyIsMuted = true
+		}
 	}
-	else if (!AdRunning() AND spotifyIsMuted)
+	else 
 	{
-		Unmute()
-		spotifyIsMuted = false
+		if (%spotifyIsMuted%)
+		{
+			ToggleMute()
+			spotifyIsMuted = false
+		}
 	}
 	Sleep, 1000
 }
 
-Mute()
+ToggleMute()
 {
   DetectHiddenWindows, On
   SetControlDelay -1
   ControlClick, x%mutex% y%mutey%, ahk_class SpotifyMainWindow,,,, NA
   DetectHiddenWindows, Off
   Return
-}
-
-Unmute()
-{
-	Mute()
-	Return
 }
 
 AdRunning()
