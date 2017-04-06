@@ -56,8 +56,8 @@ FindMuteButton()
 	winx = 0
 	winy = 0
 	WinGetPos, , , winx, winy, ahk_class SpotifyMainWindow
-	mutex := winx - 120
-	mutey := winy - 30
+	mutex := winx - 140
+	mutey := winy - 50
 }
 	
 	
